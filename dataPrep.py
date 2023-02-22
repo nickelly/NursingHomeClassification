@@ -1,3 +1,5 @@
+#methods for preparation of single dataset from healthcare datasets and for preprocessing data for use with machine learning algorithms
+
 import pandas as pd
 import numpy as np
 from sklearn.impute import KNNImputer
@@ -76,6 +78,7 @@ def prepJoinedNursingHomeData():
 #returns train/test data split into features and labels in format: trainX, trainY, testX, testY
 #target can be "FacilityReadmissionScore" or "InfectionScore"
 #scaler = "minmax" or "standard"
+#when not imputing NaNs with KNN, PCA should be set to False
 def preprocessData(data, splitSeed = 0, target = 'FacilityReadmissionScore', doImpute=True, doPCA = True, scalerType="standard"):
     
     #drop rows without a target
@@ -120,6 +123,8 @@ def preprocessData(data, splitSeed = 0, target = 'FacilityReadmissionScore', doI
         testDF.loc[:,hasNA] = KNNimp.transform(testDF.loc[:,hasNA])
 
     if doPCA:
+        if not doImpute:
+            print("When doPCA = True, doImpute should also be set to True")
         #Perform PCA, separate features and targets
         pca = PCA(n_components=0.80)
         pca.fit(trainDF[numerics])
