@@ -1,5 +1,5 @@
 # NursingHomeCategorization
-Work in progress model attempting to predict comparative performance of nursing homes.
+Data aggregation and exploratory model creation attempting to predict comparative performance of nursing homes.
 
 ### About
 Data exploration and method development can be seen in jupyter notebook folders, with functional code aggregated to relavent .py file for use in other modules where needed. 
